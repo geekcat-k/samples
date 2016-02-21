@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.cms.domain.repository.contents.CampaignRepository">
+
+    <resultMap id="campaignResultMap" type="Campaign">
+        <id property="contentsId" column="contents_id" />
+        <result property="title" column="title" />
+        <result property="campaignStart" column="campaign_start" />
+        <result property="campaignEnd" column="campaign_end" />
+        <result property="introductionText" column="introduction_text" />
+        <result property="mainImageUrl" column="main_image_url" />
+        <result property="entryUrl" column="entry_url" />
+        <result property="caution" column="caution" />
+        <result property="createUser" column="create_user" />
+        <result property="createDate" column="create_date" />
+        <result property="updateUser" column="update_user" />
+        <result property="updateDate" column="update_date" />
+    </resultMap>
+
+    <select id="findOne" parameterType="string" resultMap="campaignResultMap">
+    <![CDATA[
+        SELECT
+            contents_id,
+            title,
+            campaign_start,
+            campaign_end,
+            introduction_text,
+            main_image_url,
+            entry_url,
+            caution,
+            create_user,
+            create_date,
+            update_user,
+            update_date
+        FROM
+            campaign
+        WHERE
+            contents_id = #{contentsId}
+    ]]>
+    </select>
+
+    <select id="findAll" resultMap="campaignResultMap">
+    <![CDATA[
+        SELECT
+            contents_id,
+            title,
+            campaign_start,
+            campaign_end,
+            introduction_text,
+            main_image_url,
+            entry_url,
+            caution,
+            create_user,
+            create_date,
+            update_user,
+            update_date
+        FROM
+            campaign
+    ]]>
+    </select>
+
+    <insert id="create" parameterType="Campaign">
+    <![CDATA[
+        INSERT INTO campaign
+        (
+            contents_id,
+            title,
+            campaign_start,
+            campaign_end,
+            introduction_text,
+            main_image_url,
+            entry_url,
+            caution,
+            create_user,
+            create_date,
+            update_user,
+            update_date
+        ) 
+        VALUES
+        (
+            #{contentsId}, 
+            #{title}, 
+            #{campaignStart}, 
+            #{campaignEnd},
+            #{introductionText},
+            #{main_image_url},
+            #{entryUrl},
+            #{caution},
+            #{createUser},
+            #{createDate},
+            #{updateUser},
+            #{updateDate}
+        )
+    ]]>
+    </insert>
+</mapper>
